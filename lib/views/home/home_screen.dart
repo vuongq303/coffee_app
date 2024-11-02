@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
               fit: BoxFit.cover,
             ),
           ),
-          _space(15),
+          const SizedBox(width: 15),
         ],
       ),
       body: SingleChildScrollView(

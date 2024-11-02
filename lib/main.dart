@@ -1,3 +1,4 @@
+import 'package:coffee_app/viewmodels/detail_view_model.dart';
 import 'package:coffee_app/viewmodels/styles/my_color.dart';
 import 'package:coffee_app/views/router.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider(create: (context) => MyColor()),
+        Provider(create: (context) => DetailViewModel()),
       ],
       child: MaterialApp.router(
         title: 'Flutter App',

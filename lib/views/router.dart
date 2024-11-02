@@ -1,3 +1,4 @@
+import 'package:coffee_app/views/detail/detail_screen.dart';
 import 'package:coffee_app/views/home/home_screen.dart';
 import 'package:coffee_app/views/login_register/login_screen.dart';
 import 'package:coffee_app/views/login_register/register_screen.dart';
@@ -21,6 +22,10 @@ final router = GoRouter(
         GoRoute(
           path: '/home',
           builder: (context, state) => const HomeScreen(),
+        ),
+        GoRoute(
+          path: '/detail',
+          builder: (context, state) => const DetailScreen(),
         ),
       ],
     ),
