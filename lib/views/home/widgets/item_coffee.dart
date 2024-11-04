@@ -110,7 +110,7 @@ class ItemCoffee extends StatelessWidget {
                   Text(
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    itemCoffee.description,
+                    itemCoffee.info,
                     style: const TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w400,

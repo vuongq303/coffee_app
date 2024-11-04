@@ -54,13 +54,14 @@ class InformationHeaderDetail extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 13, vertical: 6),
+                    height: 55,
+                    width: 55,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.black,
                     ),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
                           'assets/images/bean.png',
@@ -80,12 +81,13 @@ class InformationHeaderDetail extends StatelessWidget {
                   ),
                   const SizedBox(width: 20),
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    height: 55,
+                    width: 55,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.black),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
                           'assets/images/location.png',
@@ -128,7 +130,7 @@ class InformationHeaderDetail extends StatelessWidget {
                   ),
                   const SizedBox(width: 5),
                   Text(
-                    '(6,789)',
+                    '(${item.buy})',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
@@ -138,17 +140,20 @@ class InformationHeaderDetail extends StatelessWidget {
                 ],
               ),
               Container(
-                padding: const EdgeInsets.all(15),
+                width: 125,
+                height: 45,
                 decoration: BoxDecoration(
                   color: Colors.black,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Text(
-                  'Medium Roadsted',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: color.gray,
+                child: Center(
+                  child: Text(
+                    item.info,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: color.gray,
+                    ),
                   ),
                 ),
               )

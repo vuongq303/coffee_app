@@ -1,5 +1,7 @@
 import 'package:coffee_app/viewmodels/detail_view_model.dart';
 import 'package:coffee_app/viewmodels/styles/my_color.dart';
+import 'package:coffee_app/views/cart/cart_screen.dart';
+import 'package:coffee_app/views/home/home_screen.dart';
 import 'package:coffee_app/views/router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +27,78 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         routerConfig: router,
+      ),
+    );
+  }
+}
+
+class HomeApp extends StatefulWidget {
+  const HomeApp({super.key});
+
+  @override
+  State<HomeApp> createState() => _HomeAppState();
+}
+
+class _HomeAppState extends State<HomeApp> {
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    HomeScreen(),
+    CartScreen(),
+    Text(
+      'Index 2: School',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 3: Settings',
+      style: optionStyle,
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final color = context.read<MyColor>();
+
+    return Scaffold(
+      body: _widgetOptions.elementAt(_selectedIndex),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            activeIcon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            activeIcon: Icon(Icons.badge),
+            icon: Icon(Icons.badge_outlined),
+            label: 'Cart',
+          ),
+          BottomNavigationBarItem(
+            activeIcon: Icon(Icons.favorite),
+            icon: Icon(Icons.favorite_outline),
+            label: 'Favorite',
+          ),
+          BottomNavigationBarItem(
+            activeIcon: Icon(Icons.notifications),
+            icon: Icon(Icons.notifications_outlined),
+            label: 'History',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: color.redOrange,
+        unselectedItemColor: color.gray,
+        iconSize: 21,
+        selectedFontSize: 0,
+        unselectedFontSize: 0,
+        onTap: _onItemTapped,
       ),
     );
   }

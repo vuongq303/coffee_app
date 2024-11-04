@@ -1,23 +1,17 @@
-import 'package:coffee_app/models/coffee_model.dart';
+import 'package:coffee_app/models/cart_model.dart';
 import 'package:coffee_app/viewmodels/styles/my_color.dart';
 
-class DetailViewModel {
+class CartViewModel {
   MyColor color = MyColor();
-  CoffeeModel coffeeModel = CoffeeModel(
+
+  CartModel cartModel = CartModel(
     id: '',
+    idProduct: '',
     image:
         'https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp',
     name: '',
     description: '',
-    price: 0,
-    rate: 0,
-    type: 'coffee',
-    buy: 0,
-    info: '',
-    size: [],
+    size: '',
+    quantity: 0,
   );
-
-  void setItemDetail(CoffeeModel coffeeItem) {
-    coffeeModel = coffeeItem;
-  }
 }

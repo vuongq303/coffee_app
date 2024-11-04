@@ -3,6 +3,7 @@ import 'package:coffee_app/viewmodels/styles/my_color.dart';
 import 'package:coffee_app/views/home/data/home_data.dart';
 import 'package:coffee_app/views/home/widgets/item_coffee.dart';
 import 'package:coffee_app/views/home/widgets/select_type_home.dart';
+import 'package:coffee_app/widgets/header_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,37 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final color = context.read<MyColor>();
 
     return Scaffold(
-      appBar: AppBar(
-        leading: Center(
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: color.gray, width: 0.5),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            height: 30,
-            width: 30,
-            child: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.window,
-                color: color.gray,
-                size: 14,
-              ),
-            ),
-          ),
-        ),
-        actions: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.asset(
-              'assets/images/avatar.jpg',
-              height: 30,
-              width: 30,
-              fit: BoxFit.cover,
-            ),
-          ),
-          const SizedBox(width: 15),
-        ],
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: HeaderNavigation(color: color, title: ''),
       ),
       body: SingleChildScrollView(
         child: Column(
