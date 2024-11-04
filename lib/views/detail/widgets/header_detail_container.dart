@@ -20,18 +20,20 @@ class HeaderDetailContainer extends StatelessWidget {
           item.image,
           fit: BoxFit.cover,
         ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              margin: const EdgeInsets.symmetric(
-                horizontal: 15,
-                vertical: 25,
+        SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 15,
+                  vertical: 5,
+                ),
+                child: const NavHeaderDetail(),
               ),
-              child: const NavHeaderDetail(),
-            ),
-            const InformationHeaderDetail(),
-          ],
+              const InformationHeaderDetail(),
+            ],
+          ),
         ),
       ],
     );
