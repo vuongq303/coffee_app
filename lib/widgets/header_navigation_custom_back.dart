@@ -1,39 +1,26 @@
 import 'package:coffee_app/viewmodels/styles/my_color.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
-class HeaderNavigation extends StatelessWidget {
-  const HeaderNavigation({super.key, required this.color, required this.title});
-
-  final MyColor color;
+class HeaderNavigationCustomBack extends StatelessWidget {
+  const HeaderNavigationCustomBack({super.key, required this.title});
   final String title;
 
   @override
   Widget build(BuildContext context) {
-    final router = GoRouter.of(context);
-
+    final color = context.read<MyColor>();
     return AppBar(
       centerTitle: true,
       title: Text(
         title,
-        style: const TextStyle(
-          fontSize: 20,
+        style: TextStyle(
+          color: color.black,
           fontWeight: FontWeight.w600,
+          fontSize: 20,
         ),
       ),
       leading: Center(
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Image.asset(
-            'assets/images/avatar.jpg',
-            height: 30,
-            width: 30,
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
-      actions: [
-        Container(
+        child: Container(
           decoration: BoxDecoration(
             border: Border.all(color: color.gray, width: 0.5),
             borderRadius: BorderRadius.circular(10),
@@ -48,19 +35,19 @@ class HeaderNavigation extends StatelessWidget {
           ),
           height: 30,
           width: 30,
+          padding: const EdgeInsets.only(left: 2),
           child: IconButton(
             onPressed: () {
-              router.push('/setting');
+              Navigator.of(context).pop();
             },
             icon: Icon(
-              Icons.settings,
+              Icons.arrow_back_ios,
               color: color.gray,
               size: 14,
             ),
           ),
         ),
-        const SizedBox(width: 15),
-      ],
+      ),
     );
   }
 }

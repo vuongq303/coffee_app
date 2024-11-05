@@ -19,39 +19,56 @@ class NavHeaderDetail extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        GestureDetector(
-          onTap: () {
-            goBack(context);
-          },
-          child: Container(
-            padding:
-                const EdgeInsets.only(left: 14, right: 7, top: 10, bottom: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: color.black,
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            gradient: LinearGradient(
+              colors: [
+                color.black.withAlpha(200),
+                color.black,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
-            child: Icon(
+          ),
+          height: 30,
+          width: 30,
+          padding: const EdgeInsets.only(left: 2),
+          child: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: Icon(
               Icons.arrow_back_ios,
-              size: 15,
               color: color.gray,
+              size: 14,
             ),
           ),
         ),
-        GestureDetector(
-          onTap: addFavorite,
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: color.black,
-            ),
-            child: Icon(
-              Icons.favorite,
-              size: 15,
-              color: color.redOrange,
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: color.gray, width: 0.5),
+            borderRadius: BorderRadius.circular(10),
+            gradient: LinearGradient(
+              colors: [
+                color.black.withAlpha(200),
+                color.black,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
           ),
-        )
+          height: 30,
+          width: 30,
+          child: IconButton(
+            onPressed: addFavorite,
+            icon: Icon(
+              Icons.favorite,
+              color: color.redOrange,
+              size: 14,
+            ),
+          ),
+        ),
       ],
     );
   }
