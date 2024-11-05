@@ -1,14 +1,6 @@
 import 'package:coffee_app/models/coffee_model.dart';
 
-final homeDataType = [
-  "All",
-  "Cappuccino",
-  "Espresso",
-  "Americano",
-  "Macchiato",
-];
-
-final List<CoffeeModel> coffeeList = [
+final List<CoffeeModel> coffeeListFavorite = [
   CoffeeModel(
     id: 'cappuccino_1',
     image:
@@ -233,3 +225,10 @@ final List<CoffeeModel> coffeeList = [
     size: ['250gam', '500gam', '1000gam'],
   ),
 ];
+
+class _Type {
+  var value;
+  var click;
+
+  _Type({required this.value, required this.click});
+}

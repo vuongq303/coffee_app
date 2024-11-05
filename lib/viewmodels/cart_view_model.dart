@@ -12,6 +12,7 @@ class CartViewModel {
     name: '',
     description: '',
     size: '',
+    price: 0,
     quantity: 0,
   );
 }

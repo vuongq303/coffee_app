@@ -1,5 +1,4 @@
 import 'package:coffee_app/viewmodels/detail_view_model.dart';
-import 'package:coffee_app/viewmodels/styles/my_color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,70 +10,62 @@ class ListSizeSelect extends StatefulWidget {
 }
 
 class _ListSizeSelectState extends State<ListSizeSelect> {
-  late final List<_Size> listSize;
-  var itemClick = _Size(size: '', status: false);
+  late final List<String> listSize;
 
   @override
   void initState() {
     super.initState();
+
     final detailViewModel = context.read<DetailViewModel>();
     final item = detailViewModel.coffeeModel;
-    listSize = [];
-
-    for (final size in item.size) {
-      listSize.add(_Size(size: size, status: false));
-    }
+    listSize = item.size;
   }
 
   @override
   Widget build(BuildContext context) {
-    final color = context.read<MyColor>();
+    final detailViewModel = context.read<DetailViewModel>();
+    final color = detailViewModel.color;
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          for (final size in listSize)
-            GestureDetector(
-              onTap: () {
-                if (listSize.contains(itemClick)) {
-                  listSize[listSize.indexOf(itemClick)].status = false;
-                }
-                setState(() {
-                  itemClick = size;
-                  listSize[listSize.indexOf(itemClick)].status = true;
-                });
-              },
-              child: Container(
-                width: 100,
-                height: 40,
-                margin: const EdgeInsets.only(right: 15),
-                decoration: BoxDecoration(
-                  color: size.status
-                      ? color.redOrange
-                      : color.black.withAlpha(200),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Center(
-                  child: Text(
-                    size.size,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: size.status ? Colors.white : color.grayLight,
-                      fontWeight: FontWeight.w500,
+    return SizedBox(
+      height: 40,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: listSize.length,
+        itemBuilder: (context, index) {
+          final size = listSize[index];
+
+          return GestureDetector(
+            onTap: () {
+              detailViewModel.changeItemListSelect(index);
+            },
+            child: ValueListenableBuilder(
+              valueListenable: detailViewModel.itemListSizeSelect,
+              builder: (context, value, child) {
+                return Container(
+                  width: 100,
+                  margin: const EdgeInsets.only(right: 15),
+                  decoration: BoxDecoration(
+                    color: value == index
+                        ? color.redOrange
+                        : color.black.withAlpha(200),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: Text(
+                      size,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: value == index ? Colors.white : color.grayLight,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
-        ],
+          );
+        },
       ),
     );
   }
-}
-
-class _Size {
-  var size;
-  var status;
-  _Size({required this.size, required this.status});
 }

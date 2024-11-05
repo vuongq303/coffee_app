@@ -1,20 +1,16 @@
-import 'package:coffee_app/viewmodels/styles/my_color.dart';
+import 'package:coffee_app/viewmodels/home_view_model.dart';
 import 'package:coffee_app/views/home/data/home_data.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class SelectTypeHome extends StatefulWidget {
-  const SelectTypeHome({super.key, required this.color});
-  final MyColor color;
-
-  @override
-  State<SelectTypeHome> createState() => _SelectTypeHomeState();
-}
-
-class _SelectTypeHomeState extends State<SelectTypeHome> {
-  var itemClick = homeDataType.first;
+class SelectTypeHome extends StatelessWidget {
+  const SelectTypeHome({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final homeViewModel = context.read<HomeViewModel>();
+    final color = homeViewModel.myColor;
+
     return SizedBox(
       height: 35,
       child: ListView.builder(
@@ -24,20 +20,20 @@ class _SelectTypeHomeState extends State<SelectTypeHome> {
           final item = homeDataType[index];
           return TextButton(
             onPressed: () {
-              setState(() {
-                homeDataType[homeDataType.indexOf(itemClick)].click = false;
-                itemClick = item;
-                homeDataType[homeDataType.indexOf(itemClick)].click = true;
-              });
+              homeViewModel.changeTypeHomeSelect(index);
             },
-            child: Text(
-              key: ValueKey(item.value),
-              item.value,
-              style: TextStyle(
-                color: item.click ? widget.color.redOrange : widget.color.gray,
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-              ),
+            child: ValueListenableBuilder(
+              valueListenable: homeViewModel.typeHomeSelect,
+              builder: (context, value, child) {
+                return Text(
+                  item,
+                  style: TextStyle(
+                    color: value == index ? color.redOrange : color.gray,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                );
+              },
             ),
           );
         },

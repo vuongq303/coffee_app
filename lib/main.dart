@@ -1,6 +1,9 @@
+import 'package:coffee_app/viewmodels/cart_view_model.dart';
 import 'package:coffee_app/viewmodels/detail_view_model.dart';
 import 'package:coffee_app/viewmodels/styles/my_color.dart';
 import 'package:coffee_app/views/cart/cart_screen.dart';
+import 'package:coffee_app/views/favorite/favorite_screen.dart';
+import 'package:coffee_app/views/history/order_history.dart';
 import 'package:coffee_app/views/home/home_screen.dart';
 import 'package:coffee_app/views/router.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +22,7 @@ class MyApp extends StatelessWidget {
       providers: [
         Provider(create: (context) => MyColor()),
         Provider(create: (context) => DetailViewModel()),
+        Provider(create: (context) => CartViewModel())
       ],
       child: MaterialApp.router(
         title: 'Flutter App',
@@ -41,20 +45,12 @@ class HomeApp extends StatefulWidget {
 
 class _HomeAppState extends State<HomeApp> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
 
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     CartScreen(),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 3: Settings',
-      style: optionStyle,
-    ),
+    FavoriteScreen(),
+    OrderHistory(),
   ];
 
   void _onItemTapped(int index) {

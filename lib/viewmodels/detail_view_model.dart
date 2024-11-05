@@ -1,8 +1,12 @@
 import 'package:coffee_app/models/coffee_model.dart';
 import 'package:coffee_app/viewmodels/styles/my_color.dart';
+import 'package:flutter/foundation.dart';
 
 class DetailViewModel {
   MyColor color = MyColor();
+
+  ValueNotifier itemListSizeSelect = ValueNotifier<int>(-1);
+
   CoffeeModel coffeeModel = CoffeeModel(
     id: '',
     image:
@@ -10,12 +14,17 @@ class DetailViewModel {
     name: '',
     description: '',
     price: 0,
+    quantity: 0,
     rate: 0,
     type: 'coffee',
     buy: 0,
     info: '',
     size: [],
   );
+
+  void changeItemListSelect(int index) {
+    itemListSizeSelect.value = index;
+  }
 
   void setItemDetail(CoffeeModel coffeeItem) {
     coffeeModel = coffeeItem;
