@@ -26,36 +26,36 @@ class HeaderNavigation extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           child: Image.asset(
             'assets/images/avatar.jpg',
-            height: 30,
-            width: 30,
+            height: 35,
+            width: 35,
             fit: BoxFit.cover,
           ),
         ),
       ),
       actions: [
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: color.gray, width: 0.5),
-            borderRadius: BorderRadius.circular(10),
-            gradient: LinearGradient(
-              colors: [
-                color.black.withAlpha(200),
-                color.black,
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+        InkWell(
+          onTap: () {
+            router.push('/setting');
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: color.gray, width: 0.5),
+              borderRadius: BorderRadius.circular(10),
+              gradient: LinearGradient(
+                colors: [
+                  color.black.withAlpha(200),
+                  color.black,
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
             ),
-          ),
-          height: 30,
-          width: 30,
-          child: IconButton(
-            onPressed: () {
-              router.push('/setting');
-            },
-            icon: Icon(
+            height: 35,
+            width: 35,
+            child: Icon(
               Icons.settings,
               color: color.gray,
-              size: 14,
+              size: 16,
             ),
           ),
         ),

@@ -20,30 +20,30 @@ class HeaderNavigationCustomBack extends StatelessWidget {
         ),
       ),
       leading: Center(
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: color.gray, width: 0.5),
-            borderRadius: BorderRadius.circular(10),
-            gradient: LinearGradient(
-              colors: [
-                color.black.withAlpha(200),
-                color.black,
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+        child: InkWell(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: Container(
+            padding: const EdgeInsets.only(left: 5),
+            decoration: BoxDecoration(
+              border: Border.all(color: color.gray, width: 0.5),
+              borderRadius: BorderRadius.circular(10),
+              gradient: LinearGradient(
+                colors: [
+                  color.black.withAlpha(200),
+                  color.black,
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
             ),
-          ),
-          height: 30,
-          width: 30,
-          padding: const EdgeInsets.only(left: 2),
-          child: IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: Icon(
+            height: 35,
+            width: 35,
+            child: Icon(
               Icons.arrow_back_ios,
               color: color.gray,
-              size: 14,
+              size: 15,
             ),
           ),
         ),
