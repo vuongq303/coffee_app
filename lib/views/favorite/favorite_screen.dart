@@ -17,19 +17,18 @@ class FavoriteScreen extends StatelessWidget {
         preferredSize: const Size.fromHeight(kToolbarHeight),
         child: HeaderNavigation(color: color, title: 'Favorite'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                return ItemFavorite(
-                  item: coffeeListFavorite[index],
-                );
-              },
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: CustomScrollView(
+          slivers: [
+            SliverList.builder(
+              itemBuilder: (context, index) => ItemFavorite(
+                item: coffeeListFavorite[index],
+              ),
               itemCount: coffeeListFavorite.length,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -18,7 +18,7 @@ class _ListSizeSelectState extends State<ListSizeSelect> {
 
     final detailViewModel = context.read<DetailViewModel>();
     final item = detailViewModel.coffeeModel;
-    listSize = item.size;
+    listSize = ["123", "123", "123"];
   }
 
   @override

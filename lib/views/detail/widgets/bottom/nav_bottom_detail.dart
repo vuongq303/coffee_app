@@ -38,7 +38,7 @@ class NavBottomDetail extends StatelessWidget {
                       color: color.redOrange,
                     ),
                     Text(
-                      "${item.price}",
+                      "4",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,

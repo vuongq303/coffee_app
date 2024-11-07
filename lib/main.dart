@@ -1,5 +1,8 @@
 import 'package:coffee_app/viewmodels/cart_view_model.dart';
 import 'package:coffee_app/viewmodels/detail_view_model.dart';
+import 'package:coffee_app/viewmodels/home_view_model.dart';
+import 'package:coffee_app/viewmodels/login_view_model.dart';
+import 'package:coffee_app/viewmodels/register_view_model.dart';
 import 'package:coffee_app/viewmodels/styles/my_color.dart';
 import 'package:coffee_app/views/cart/cart_screen.dart';
 import 'package:coffee_app/views/favorite/favorite_screen.dart';
@@ -22,7 +25,10 @@ class MyApp extends StatelessWidget {
       providers: [
         Provider(create: (context) => MyColor()),
         Provider(create: (context) => DetailViewModel()),
-        Provider(create: (context) => CartViewModel())
+        Provider(create: (context) => CartViewModel()),
+        Provider(create: (context) => HomeViewModel()),
+        Provider(create: (context) => LoginViewModel()),
+        Provider(create: (context) => RegisterViewModel()),
       ],
       child: MaterialApp.router(
         title: 'Flutter App',

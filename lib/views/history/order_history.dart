@@ -16,12 +16,17 @@ class OrderHistory extends StatelessWidget {
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight),
           child: HeaderNavigation(color: color, title: 'Order History')),
-      body: ListView.builder(
+      body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        itemCount: historyListData.length,
-        itemBuilder: (context, index) {
-          return ItemOrderHistory(item: historyListData[index]);
-        },
+        child: CustomScrollView(
+          slivers: [
+            SliverList.builder(
+              itemCount: historyListData.length,
+              itemBuilder: (context, index) =>
+                  ItemOrderHistory(item: historyListData[index]),
+            ),
+          ],
+        ),
       ),
     );
   }

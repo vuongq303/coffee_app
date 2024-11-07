@@ -1,4 +1,4 @@
-import 'package:coffee_app/viewmodels/styles/my_color.dart';
+import 'package:coffee_app/viewmodels/login_view_model.dart';
 import 'package:coffee_app/views/login_register/widgets/button_login.dart';
 import 'package:coffee_app/views/login_register/widgets/header_login.dart';
 import 'package:coffee_app/views/login_register/widgets/text_button_login.dart';
@@ -8,11 +8,12 @@ import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
-  final formKey = GlobalKey();
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final color = context.read<MyColor>();
+    final loginViewModel = context.read<LoginViewModel>();
+    final color = loginViewModel.color;
     final maxWidth = MediaQuery.of(context).size.width;
     final router = GoRouter.of(context);
 
@@ -31,7 +32,7 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     TextFormField(
                       decoration: InputDecoration(
-                        hintText: 'Email adress',
+                        hintText: 'Username',
                         hintStyle: TextStyle(
                           color: color.gray,
                         ),
@@ -43,6 +44,8 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+                      onSaved: loginViewModel.onSaveUsernameInputForm,
+                      validator: loginViewModel.onVaidatorUsernameInputForm,
                     ),
                     const SizedBox(height: 15),
                     TextFormField(
@@ -60,12 +63,14 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+                      onSaved: loginViewModel.onSavePasswordInputForm,
+                      validator: loginViewModel.onVaidatorPasswordInputForm,
                     ),
                     const SizedBox(height: 20),
                     ButtonLogin(
                       maxWidth: maxWidth,
-                      onClick: () {
-                        router.pushReplacement('/home');
+                      onClick: () async {
+                        await loginViewModel.onSubmitFormLogin(formKey, router);
                       },
                       title: 'Sign In',
                       textColor: Colors.white,
@@ -85,7 +90,7 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: 20),
               TextButtonLogin(
                 onClick: () {
-                  router.go('/register');
+                  loginViewModel.goToRegister(router);
                 },
                 title: "Don't have account? Click ",
                 action: 'Register',

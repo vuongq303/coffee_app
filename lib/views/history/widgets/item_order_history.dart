@@ -15,7 +15,6 @@ class ItemOrderHistory extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15),
-      height: 270.0 * item.itemHistory.length,
       child: Column(
         children: [
           Row(
@@ -63,46 +62,36 @@ class ItemOrderHistory extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          Expanded(
-            child: ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: item.itemHistory.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  height: 225,
-                  margin: const EdgeInsets.only(bottom: 20),
-                  padding: const EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [color.black.withAlpha(200), color.black],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
+          for (final itemHistory in item.itemHistory)
+            Container(
+              margin: const EdgeInsets.only(bottom: 20),
+              padding: const EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    color.black.withAlpha(200),
+                    color.black,
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                children: [
+                  ItemOrderHistoryTop(
+                    color: color,
+                    item: itemHistory,
+                  ),
+                  const SizedBox(height: 10),
+                  for (final itemSize in itemHistory.size)
+                    ItemOrderHistoryBody(
+                      color: color,
+                      item: itemSize,
                     ),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        flex: 3,
-                        child: ItemOrderHistoryTop(
-                          color: color,
-                          item: item.itemHistory[index],
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Expanded(
-                        flex: 7,
-                        child: ItemOrderHistoryBody(
-                          color: color,
-                          item: item.itemHistory[index],
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
+                ],
+              ),
             ),
-          )
         ],
       ),
     );

@@ -1,4 +1,4 @@
-import 'package:coffee_app/models/coffee_model.dart';
+import 'package:coffee_app/service/models/coffee_model.dart';
 import 'package:coffee_app/viewmodels/detail_view_model.dart';
 import 'package:coffee_app/viewmodels/styles/my_color.dart';
 import 'package:flutter/material.dart';
@@ -131,9 +131,9 @@ class ItemCoffee extends StatelessWidget {
                             color: color.redOrange,
                           ),
                           Text(
-                            "${itemCoffee.price}",
+                            "5",
                             style: const TextStyle(
-                              fontSize: 15,
+                              fontSize: 16,
                               fontWeight: FontWeight.w600,
                               color: Colors.white,
                             ),
@@ -151,7 +151,7 @@ class ItemCoffee extends StatelessWidget {
                           onPressed: () {},
                           icon: const Icon(
                             Icons.add,
-                            size: _iconSize,
+                            size: _iconSize + 5,
                             color: Colors.white,
                           ),
                         ),

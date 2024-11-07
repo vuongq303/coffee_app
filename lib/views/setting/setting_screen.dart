@@ -9,6 +9,8 @@ class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
 
   void _logOut(BuildContext context, MyColor color) {
+    final router = GoRouter.of(context);
+
     showDialog(
       context: context,
       builder: (context) => Dialog(
@@ -53,6 +55,9 @@ class SettingScreen extends StatelessWidget {
                   const SizedBox(width: 5),
                   Expanded(
                     child: InkWell(
+                      onTap: () {
+                        router.go('/');
+                      },
                       borderRadius: BorderRadius.circular(10),
                       child: Container(
                         height: 40,
