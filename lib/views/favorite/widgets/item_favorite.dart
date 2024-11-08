@@ -1,4 +1,3 @@
-import 'package:coffee_app/models/coffee_model.dart';
 import 'package:coffee_app/service/models/favorite_model.dart';
 import 'package:coffee_app/utils/string_util.dart';
 import 'package:coffee_app/viewmodels/styles/my_color.dart';
@@ -31,7 +30,7 @@ class ItemFavorite extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 400,
+            height: 450,
             child: Stack(
               fit: StackFit.expand,
               children: [
@@ -41,7 +40,7 @@ class ItemFavorite extends StatelessWidget {
                     topRight: Radius.circular(30),
                   ),
                   child: Image.network(
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQphO1iGa3a8wJpd43zAbREvXa8q4DmAIKww&s',
+                    item.image!,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -77,7 +76,7 @@ class ItemFavorite extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '',
+                                      item.name!,
                                       style: const TextStyle(
                                         fontSize: 23,
                                         fontWeight: FontWeight.w600,
@@ -114,7 +113,7 @@ class ItemFavorite extends StatelessWidget {
                                             height: 27,
                                           ),
                                           Text(
-                                            upcaseFistText(''),
+                                            upcaseFistText(item.type!),
                                             style: TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.w500,
@@ -168,7 +167,7 @@ class ItemFavorite extends StatelessWidget {
                                     ),
                                     const SizedBox(width: 5),
                                     Text(
-                                      '1',
+                                      '${item.rate}',
                                       style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w600,
@@ -177,7 +176,7 @@ class ItemFavorite extends StatelessWidget {
                                     ),
                                     const SizedBox(width: 5),
                                     Text(
-                                      '(1)',
+                                      '(${item.buy})',
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w400,
@@ -195,7 +194,7 @@ class ItemFavorite extends StatelessWidget {
                                   ),
                                   child: Center(
                                     child: Text(
-                                      '',
+                                      item.info!,
                                       style: TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500,
@@ -216,7 +215,7 @@ class ItemFavorite extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -231,7 +230,7 @@ class ItemFavorite extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  '',
+                  item.description!,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,

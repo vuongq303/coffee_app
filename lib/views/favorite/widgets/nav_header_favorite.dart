@@ -23,6 +23,7 @@ class NavHeaderFavorite extends StatelessWidget {
         GestureDetector(
           onTap: addFavorite,
           child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),

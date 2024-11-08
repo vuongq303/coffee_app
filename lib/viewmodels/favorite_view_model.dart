@@ -12,7 +12,7 @@ class FavoriteViewModel {
   NativeModule nativeModule = NativeModule();
   final logger = Logger();
 
-  Future<void> addCoffeeToFavorite({required int idCofee}) async {
+  Future<bool> changeCoffeeFavorite({required int idCofee}) async {
     final sharedPreferences = await SharedPreferences.getInstance();
 
     final FavoriteModel favoriteModel = FavoriteModel(
@@ -24,9 +24,16 @@ class FavoriteViewModel {
         await _databaseService.addCoffeeToFavorite(favoriteModel);
     if (resultAddCoffee) {
       nativeModule.showToast('Add to favorite complete!');
+      return false;
     } else {
-      nativeModule.showToast('Add to favorite fail');
+      final resultDeleteCoffee =
+          await _databaseService.deleteCoffeeFromFavorite(favoriteModel);
+      if (resultDeleteCoffee) {
+        nativeModule.showToast('Delete from favorite complete!');
+        return true;
+      }
     }
+    return true;
   }
 
   Future<void> removeCoffeeToFavorite({required int idCofee}) async {

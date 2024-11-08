@@ -178,9 +178,8 @@ class DatabaseService {
   }
 
   Future<bool> findFavoriteById(
-      {required Database db,
-      required String username,
-      required int idCoffee}) async {
+      {required String username, required int idCoffee}) async {
+    final db = await _databaseService.database;
     final favoriteQuery = await db.query(
       favorites,
       where: '$idCoffeeFavorite = ? and $usernameUsersFavorite = ?',
@@ -195,7 +194,6 @@ class DatabaseService {
   Future<bool> addCoffeeToFavorite(FavoriteModel favorite) async {
     final db = await _databaseService.database;
     final checkFavoriteExist = await findFavoriteById(
-      db: db,
       username: favorite.username,
       idCoffee: favorite.idCofee,
     );
@@ -211,11 +209,12 @@ class DatabaseService {
       {required String username}) async {
     final db = await _databaseService.database;
 
-    final listFavoriteQuery = await db.query(
-      favorites,
-      where: '$usernameUsersFavorite = ?',
-      whereArgs: [username],
-    );
+    final listFavoriteQuery = await db.rawQuery('''
+     SELECT *
+    FROM $coffee
+    INNER JOIN $favorites ON
+    $coffee.$idCoffee = $favorites.$idCoffeeFavorite;
+    ''');
 
     final listFavorite = listFavoriteQuery
         .map(

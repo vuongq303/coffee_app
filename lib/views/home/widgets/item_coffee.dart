@@ -150,7 +150,7 @@ class ItemCoffee extends StatelessWidget {
                         child: IconButton(
                           onPressed: () {},
                           icon: const Icon(
-                            Icons.shopping_cart,
+                            Icons.add,
                             size: _iconSize + 5,
                             color: Colors.white,
                           ),

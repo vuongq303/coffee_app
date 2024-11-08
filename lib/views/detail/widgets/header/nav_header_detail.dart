@@ -12,6 +12,7 @@ class NavHeaderDetail extends StatelessWidget {
     final itemSelected = detailViewModel.coffeeModel;
     final favoriteViewModel = context.read<FavoriteViewModel>();
     final color = favoriteViewModel.color;
+    detailViewModel.checkIsFavorite(idCoffee: itemSelected.id!);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,15 +59,24 @@ class NavHeaderDetail extends StatelessWidget {
           ),
           height: 30,
           width: 30,
-          child: IconButton(
-            onPressed: () {
-              favoriteViewModel.addCoffeeToFavorite(idCofee: itemSelected.id!);
+          child: ValueListenableBuilder(
+            valueListenable: detailViewModel.isFavorite,
+            builder: (context, value, child) {
+              return IconButton(
+                onPressed: () async {
+                  final isFavorite =
+                      await favoriteViewModel.changeCoffeeFavorite(
+                    idCofee: itemSelected.id!,
+                  );
+                  detailViewModel.changeIsFavorite(isFavorite);
+                },
+                icon: Icon(
+                  Icons.favorite,
+                  color: value ? Colors.white : color.redOrange,
+                  size: 14,
+                ),
+              );
             },
-            icon: Icon(
-              Icons.favorite,
-              color: color.redOrange,
-              size: 14,
-            ),
           ),
         ),
       ],
