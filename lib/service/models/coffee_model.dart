@@ -1,6 +1,9 @@
+import 'dart:convert';
+
+import './size_model.dart';
+
 class CoffeeModel {
   final int? id;
-  final int idSize;
   final String image;
   final String name;
   final String description;
@@ -8,6 +11,7 @@ class CoffeeModel {
   final String type;
   final int buy;
   final String info;
+  final List<SizeModel> size;
 
   CoffeeModel({
     required this.id,
@@ -18,13 +22,13 @@ class CoffeeModel {
     required this.type,
     required this.buy,
     required this.info,
-    required this.idSize,
+    required this.size,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'idSize': idSize,
+      'size': size,
       'image': image,
       'name': name,
       'description': description,
@@ -36,9 +40,15 @@ class CoffeeModel {
   }
 
   factory CoffeeModel.fromMap(Map<String, dynamic> map) {
+    List<SizeModel> listSizeModel = [];
+
+    for (var itemSize in json.decode(map['size'])) {
+      listSizeModel.add(SizeModel.fromMap(itemSize));
+    }
+
     final CoffeeModel coffeeModel = CoffeeModel(
       id: map['id'].toInt() ?? 0,
-      idSize: map['idSize'].toInt() ?? 0,
+      size: listSizeModel,
       image: map["image"] ?? "",
       name: map['name'] ?? "",
       description: map['description'] ?? "",

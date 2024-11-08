@@ -1,19 +1,17 @@
-import 'package:coffee_app/viewmodels/styles/my_color.dart';
+import 'package:coffee_app/viewmodels/detail_view_model.dart';
+import 'package:coffee_app/viewmodels/favorite_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class NavHeaderDetail extends StatelessWidget {
   const NavHeaderDetail({super.key});
 
-  void goBack(BuildContext context) {
-    Navigator.pop(context);
-  }
-
-  void addFavorite() {}
-
   @override
   Widget build(BuildContext context) {
-    final color = context.read<MyColor>();
+    final detailViewModel = context.read<DetailViewModel>();
+    final itemSelected = detailViewModel.coffeeModel;
+    final favoriteViewModel = context.read<FavoriteViewModel>();
+    final color = favoriteViewModel.color;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,7 +34,7 @@ class NavHeaderDetail extends StatelessWidget {
           padding: const EdgeInsets.only(left: 2),
           child: IconButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              favoriteViewModel.backToHomeScreen(context);
             },
             icon: Icon(
               Icons.arrow_back_ios,
@@ -61,7 +59,9 @@ class NavHeaderDetail extends StatelessWidget {
           height: 30,
           width: 30,
           child: IconButton(
-            onPressed: addFavorite,
+            onPressed: () {
+              favoriteViewModel.addCoffeeToFavorite(idCofee: itemSelected.id!);
+            },
             icon: Icon(
               Icons.favorite,
               color: color.redOrange,

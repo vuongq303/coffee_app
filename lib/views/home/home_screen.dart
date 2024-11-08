@@ -3,10 +3,18 @@ import 'package:coffee_app/views/home/widgets/item_coffee.dart';
 import 'package:coffee_app/views/home/widgets/select_type_home.dart';
 import 'package:coffee_app/widgets/header_navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  Logger logger = Logger();
 
   @override
   Widget build(BuildContext context) {
@@ -78,16 +86,10 @@ class HomeScreen extends StatelessWidget {
                   if (snapshot.hasData) {
                     final listCoffee = snapshot.data;
 
-                    if (listCoffee == null) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-
                     return ListView.builder(
                       padding: const EdgeInsets.only(left: 15),
                       scrollDirection: Axis.horizontal,
-                      itemCount: listCoffee.length,
+                      itemCount: listCoffee!.length,
                       itemBuilder: (context, index) {
                         final item = listCoffee[index];
                         return ItemCoffee(itemCoffee: item, color: color);
@@ -125,23 +127,16 @@ class HomeScreen extends StatelessWidget {
                   if (snapshot.hasData) {
                     final listCoffee = snapshot.data;
 
-                    if (listCoffee == null) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-
                     return ListView.builder(
                       padding: const EdgeInsets.only(left: 15),
                       scrollDirection: Axis.horizontal,
-                      itemCount: listCoffee.length,
+                      itemCount: listCoffee!.length,
                       itemBuilder: (context, index) {
                         final item = listCoffee[index];
                         return ItemCoffee(itemCoffee: item, color: color);
                       },
                     );
                   }
-
                   return const Center(
                     child: CircularProgressIndicator(),
                   );

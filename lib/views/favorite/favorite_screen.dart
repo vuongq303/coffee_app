@@ -1,5 +1,4 @@
-import 'package:coffee_app/viewmodels/styles/my_color.dart';
-import 'package:coffee_app/views/favorite/widgets/data/favorite_data.dart';
+import 'package:coffee_app/viewmodels/favorite_view_model.dart';
 import 'package:coffee_app/views/favorite/widgets/item_favorite.dart';
 import 'package:coffee_app/widgets/header_navigation.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,8 @@ class FavoriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = context.read<MyColor>();
+    final favoriteViewModel = context.read<FavoriteViewModel>();
+    final color = favoriteViewModel.color;
 
     return Scaffold(
       appBar: PreferredSize(
@@ -19,15 +19,28 @@ class FavoriteScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: CustomScrollView(
-          slivers: [
-            SliverList.builder(
-              itemBuilder: (context, index) => ItemFavorite(
-                item: coffeeListFavorite[index],
-              ),
-              itemCount: coffeeListFavorite.length,
-            ),
-          ],
+        child: FutureBuilder(
+          future: favoriteViewModel.listFavorite,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final listFavorite = snapshot.data;
+
+              return CustomScrollView(
+                slivers: [
+                  SliverList.builder(
+                    itemBuilder: (context, index) => ItemFavorite(
+                      item: listFavorite[index],
+                    ),
+                    itemCount: listFavorite!.length,
+                  ),
+                ],
+              );
+            }
+
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
         ),
       ),
     );

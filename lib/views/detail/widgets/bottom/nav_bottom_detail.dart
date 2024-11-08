@@ -10,7 +10,7 @@ class NavBottomDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final detailViewModel = context.read<DetailViewModel>();
-    final item = detailViewModel.coffeeModel;
+    final price = detailViewModel.priceInDetailScreen;
     final color = detailViewModel.color;
 
     return Container(
@@ -37,13 +37,18 @@ class NavBottomDetail extends StatelessWidget {
                       size: 20,
                       color: color.redOrange,
                     ),
-                    Text(
-                      "4",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        color: color.black,
-                      ),
+                    ValueListenableBuilder(
+                      valueListenable: price,
+                      builder: (context, value, child) {
+                        return Text(
+                          '$value',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: color.black,
+                          ),
+                        );
+                      },
                     )
                   ],
                 ),

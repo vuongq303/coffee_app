@@ -5,6 +5,7 @@ import 'package:coffee_app/viewmodels/styles/my_color.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginViewModel {
   final MyColor color = MyColor();
@@ -43,6 +44,9 @@ class LoginViewModel {
 
   Future<void> onSubmitFormLogin(
       GlobalKey<FormState> key, GoRouter router) async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+
     if (key.currentState!.validate()) {
       key.currentState!.save();
 
@@ -51,7 +55,12 @@ class LoginViewModel {
       final userQuery = await _databaseService.getUser(user);
 
       if (userQuery != null) {
+        await sharedPreferences.setString(
+          'usernameOfUser',
+          usernameInputForm,
+        );
         router.go('/home');
+
         return;
       }
       module.showToast('Username or password incorrect!');

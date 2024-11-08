@@ -21,87 +21,93 @@ class LoginScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const HeaderLogin(content: 'Login to continue'),
-              const SizedBox(height: 15),
-              Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      decoration: InputDecoration(
-                        hintText: 'Username',
-                        hintStyle: TextStyle(
-                          color: color.gray,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6),
-                          borderSide: BorderSide(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const HeaderLogin(content: 'Login to continue'),
+                const SizedBox(height: 15),
+                Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        decoration: InputDecoration(
+                          hintText: 'Username',
+                          hintStyle: TextStyle(
                             color: color.gray,
-                            width: 1,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6),
+                            borderSide: BorderSide(
+                              color: color.gray,
+                              width: 1,
+                            ),
                           ),
                         ),
+                        onChanged: (String value) {
+                          print(value);
+                        },
+                        onSaved: loginViewModel.onSaveUsernameInputForm,
+                        validator: loginViewModel.onVaidatorUsernameInputForm,
                       ),
-                      onSaved: loginViewModel.onSaveUsernameInputForm,
-                      validator: loginViewModel.onVaidatorUsernameInputForm,
-                    ),
-                    const SizedBox(height: 15),
-                    TextFormField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        hintText: 'Password',
-                        hintStyle: TextStyle(
-                          color: color.gray,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6),
-                          borderSide: BorderSide(
+                      const SizedBox(height: 15),
+                      TextFormField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          hintText: 'Password',
+                          hintStyle: TextStyle(
                             color: color.gray,
-                            width: 1,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6),
+                            borderSide: BorderSide(
+                              color: color.gray,
+                              width: 1,
+                            ),
                           ),
                         ),
+                        onSaved: loginViewModel.onSavePasswordInputForm,
+                        validator: loginViewModel.onVaidatorPasswordInputForm,
                       ),
-                      onSaved: loginViewModel.onSavePasswordInputForm,
-                      validator: loginViewModel.onVaidatorPasswordInputForm,
-                    ),
-                    const SizedBox(height: 20),
-                    ButtonLogin(
-                      maxWidth: maxWidth,
-                      onClick: () async {
-                        await loginViewModel.onSubmitFormLogin(formKey, router);
-                      },
-                      title: 'Sign In',
-                      textColor: Colors.white,
-                      bgColor: color.redOrange,
-                    ),
-                    const SizedBox(height: 15),
-                    ButtonLogin(
-                      maxWidth: maxWidth,
-                      onClick: () {},
-                      textColor: Colors.black,
-                      title: 'Sign in with Google',
-                      bgColor: color.gray.withOpacity(0.1),
-                    ),
-                  ],
+                      const SizedBox(height: 20),
+                      ButtonLogin(
+                        maxWidth: maxWidth,
+                        onClick: () async {
+                          await loginViewModel.onSubmitFormLogin(
+                              formKey, router);
+                        },
+                        title: 'Sign In',
+                        textColor: Colors.white,
+                        bgColor: color.redOrange,
+                      ),
+                      const SizedBox(height: 15),
+                      ButtonLogin(
+                        maxWidth: maxWidth,
+                        onClick: () {},
+                        textColor: Colors.black,
+                        title: 'Sign in with Google',
+                        bgColor: color.gray.withOpacity(0.1),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              TextButtonLogin(
-                onClick: () {
-                  loginViewModel.goToRegister(router);
-                },
-                title: "Don't have account? Click ",
-                action: 'Register',
-              ),
-              const SizedBox(height: 10),
-              TextButtonLogin(
-                onClick: () {},
-                title: "Forget password? Click ",
-                action: 'Reset',
-              ),
-            ],
+                const SizedBox(height: 20),
+                TextButtonLogin(
+                  onClick: () {
+                    loginViewModel.goToRegister(router);
+                  },
+                  title: "Don't have account? Click ",
+                  action: 'Register',
+                ),
+                const SizedBox(height: 10),
+                TextButtonLogin(
+                  onClick: () {},
+                  title: "Forget password? Click ",
+                  action: 'Reset',
+                ),
+              ],
+            ),
           ),
         ),
       ),

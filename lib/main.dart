@@ -1,5 +1,6 @@
 import 'package:coffee_app/viewmodels/cart_view_model.dart';
 import 'package:coffee_app/viewmodels/detail_view_model.dart';
+import 'package:coffee_app/viewmodels/favorite_view_model.dart';
 import 'package:coffee_app/viewmodels/home_view_model.dart';
 import 'package:coffee_app/viewmodels/login_view_model.dart';
 import 'package:coffee_app/viewmodels/register_view_model.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         Provider(create: (context) => HomeViewModel()),
         Provider(create: (context) => LoginViewModel()),
         Provider(create: (context) => RegisterViewModel()),
+        Provider(create: (context) => FavoriteViewModel())
       ],
       child: MaterialApp.router(
         title: 'Flutter App',
@@ -79,8 +81,8 @@ class _HomeAppState extends State<HomeApp> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            activeIcon: Icon(Icons.badge),
-            icon: Icon(Icons.badge_outlined),
+            activeIcon: Icon(Icons.shopping_cart_sharp),
+            icon: Icon(Icons.shopping_cart_outlined),
             label: 'Cart',
           ),
           BottomNavigationBarItem(

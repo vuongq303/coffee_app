@@ -1,4 +1,5 @@
 import 'package:coffee_app/models/coffee_model.dart';
+import 'package:coffee_app/service/models/favorite_model.dart';
 import 'package:coffee_app/utils/string_util.dart';
 import 'package:coffee_app/viewmodels/styles/my_color.dart';
 import 'package:coffee_app/views/favorite/widgets/nav_header_favorite.dart';
@@ -7,7 +8,7 @@ import 'package:provider/provider.dart';
 
 class ItemFavorite extends StatelessWidget {
   const ItemFavorite({super.key, required this.item});
-  final CoffeeModel item;
+  final FavoriteModel item;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class ItemFavorite extends StatelessWidget {
                     topRight: Radius.circular(30),
                   ),
                   child: Image.network(
-                    item.image,
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQphO1iGa3a8wJpd43zAbREvXa8q4DmAIKww&s',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -76,7 +77,7 @@ class ItemFavorite extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      item.name,
+                                      '',
                                       style: const TextStyle(
                                         fontSize: 23,
                                         fontWeight: FontWeight.w600,
@@ -113,7 +114,7 @@ class ItemFavorite extends StatelessWidget {
                                             height: 27,
                                           ),
                                           Text(
-                                            upcaseFistText(item.type),
+                                            upcaseFistText(''),
                                             style: TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.w500,
@@ -167,7 +168,7 @@ class ItemFavorite extends StatelessWidget {
                                     ),
                                     const SizedBox(width: 5),
                                     Text(
-                                      '${item.rate}',
+                                      '1',
                                       style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w600,
@@ -176,7 +177,7 @@ class ItemFavorite extends StatelessWidget {
                                     ),
                                     const SizedBox(width: 5),
                                     Text(
-                                      '(${item.buy})',
+                                      '(1)',
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w400,
@@ -194,7 +195,7 @@ class ItemFavorite extends StatelessWidget {
                                   ),
                                   child: Center(
                                     child: Text(
-                                      item.info,
+                                      '',
                                       style: TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500,
@@ -230,7 +231,7 @@ class ItemFavorite extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  item.description,
+                  '',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,

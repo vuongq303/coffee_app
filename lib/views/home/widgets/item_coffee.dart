@@ -101,7 +101,7 @@ class ItemCoffee extends StatelessWidget {
                   Text(
                     itemCoffee.name,
                     style: const TextStyle(
-                      fontSize: 15,
+                      fontSize: 16,
                       fontWeight: FontWeight.w500,
                       color: Colors.white,
                     ),
@@ -112,7 +112,7 @@ class ItemCoffee extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     itemCoffee.info,
                     style: const TextStyle(
-                      fontSize: 10,
+                      fontSize: 12,
                       fontWeight: FontWeight.w400,
                       color: Colors.white,
                     ),
@@ -131,7 +131,7 @@ class ItemCoffee extends StatelessWidget {
                             color: color.redOrange,
                           ),
                           Text(
-                            "5",
+                            ' ${itemCoffee.size.first.price}',
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -150,7 +150,7 @@ class ItemCoffee extends StatelessWidget {
                         child: IconButton(
                           onPressed: () {},
                           icon: const Icon(
-                            Icons.add,
+                            Icons.shopping_cart,
                             size: _iconSize + 5,
                             color: Colors.white,
                           ),
