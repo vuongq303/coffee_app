@@ -45,9 +45,6 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        onChanged: (String value) {
-                          print(value);
-                        },
                         onSaved: loginViewModel.onSaveUsernameInputForm,
                         validator: loginViewModel.onVaidatorUsernameInputForm,
                       ),

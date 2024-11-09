@@ -1,4 +1,4 @@
-import 'package:coffee_app/viewmodels/styles/my_color.dart';
+import 'package:coffee_app/viewmodels/cart_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -7,7 +7,8 @@ class BottomNavCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = context.read<MyColor>();
+    final cartViewModel = context.watch<CartViewModel>();
+    final color = cartViewModel.color;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 15),
@@ -33,14 +34,19 @@ class BottomNavCart extends StatelessWidget {
                       size: 20,
                       color: color.redOrange,
                     ),
-                    Text(
-                      "",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        color: color.black,
-                      ),
-                    )
+                    ValueListenableBuilder(
+                      valueListenable: cartViewModel.totalPriceInCart,
+                      builder: (context, value, child) {
+                        return Text(
+                          "$value",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: color.black,
+                          ),
+                        );
+                      },
+                    ),
                   ],
                 ),
               ],
@@ -56,7 +62,7 @@ class BottomNavCart extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: const Text(
-                  'Add to Cart',
+                  'Checkout',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16,

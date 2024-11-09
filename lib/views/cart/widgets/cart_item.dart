@@ -1,4 +1,4 @@
-import 'package:coffee_app/models/cart_model.dart';
+import 'package:coffee_app/service/models/cart_model.dart';
 import 'package:coffee_app/viewmodels/styles/my_color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -53,7 +53,7 @@ class _CartItemState extends State<CartItem> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: Image.network(
-                  widget.cartItem.image,
+                  '${widget.cartItem.image}',
                   fit: BoxFit.cover,
                   height: 130,
                   width: 130,
@@ -71,7 +71,7 @@ class _CartItemState extends State<CartItem> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.cartItem.name,
+                      '${widget.cartItem.name}',
                       style: const TextStyle(
                         fontSize: 18,
                         color: Colors.white,
@@ -84,7 +84,7 @@ class _CartItemState extends State<CartItem> {
                       child: Text(
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        widget.cartItem.description,
+                        '${widget.cartItem.description}',
                         style: const TextStyle(
                           fontSize: 12,
                           color: Colors.white,
@@ -97,18 +97,18 @@ class _CartItemState extends State<CartItem> {
                 Row(
                   children: [
                     Container(
-                      height: 35,
-                      width: 70,
+                      height: 30,
+                      width: 80,
                       decoration: BoxDecoration(
                         color: color.black,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Center(
                         child: Text(
-                          widget.cartItem.size,
+                          widget.cartItem.type,
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: FontWeight.w500,
                           ),
                         ),

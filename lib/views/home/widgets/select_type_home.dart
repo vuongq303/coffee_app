@@ -1,7 +1,14 @@
 import 'package:coffee_app/viewmodels/home_view_model.dart';
-import 'package:coffee_app/views/home/data/home_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+final homeDataType = [
+  "All",
+  "Cappuccino",
+  "Espresso",
+  "Americano",
+  "Macchiato",
+];
 
 class SelectTypeHome extends StatelessWidget {
   const SelectTypeHome({super.key});

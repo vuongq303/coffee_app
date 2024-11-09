@@ -1,7 +1,6 @@
 import 'package:coffee_app/service/models/size_model.dart';
 import 'package:coffee_app/viewmodels/detail_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
 class ListSizeSelect extends StatefulWidget {
@@ -13,7 +12,6 @@ class ListSizeSelect extends StatefulWidget {
 
 class _ListSizeSelectState extends State<ListSizeSelect> {
   late final List<SizeModel> listSize;
-  final logger = Logger();
 
   @override
   void initState() {

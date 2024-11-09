@@ -1,3 +1,4 @@
+import 'package:coffee_app/service/models/cart_model.dart';
 import 'package:coffee_app/service/models/favorite_model.dart';
 import 'package:logger/logger.dart';
 import 'package:sqflite/sqflite.dart';
@@ -41,6 +42,8 @@ class DatabaseService {
   final String idCart = "id";
   final String usernameUsersCart = "username";
   final String idCoffeeCart = "idCoffee";
+  final String priceCart = "price";
+  final String typeCart = "type";
 
   static Database? _database;
 
@@ -87,9 +90,11 @@ class DatabaseService {
 
     await db.execute('''
       create table $carts(
-      $idCart INTEGER primary key autoincrement,
+      $idCart INTEGER primary key AUTOINCREMENT,
       $usernameUsersCart text,
-      $idCoffeeCart INTEGER
+      $idCoffeeCart INTEGER,
+      $priceCart float,
+      $typeCart text
     )''');
 
     await db.execute('''
@@ -231,6 +236,77 @@ class DatabaseService {
       favorites,
       where: '$idCoffeeFavorite = ? and $usernameUsersFavorite = ?',
       whereArgs: [favorite.idCofee, favorite.username],
+    );
+
+    if (resultDeleteCoffee > 0) {
+      return true;
+    }
+
+    return false;
+  }
+
+  Future<List<CartModel>> getAllListCart({required String username}) async {
+    final db = await _databaseService.database;
+    final cartQuery = await db.rawQuery('''
+      SELECT
+      c.$idCart,
+      c.$usernameUsersCart,
+      c.$idCoffeeCart,
+      c.$priceCart,
+      c.$typeCart,  
+      co.$imageCoffee,
+      co.$nameCoffee,
+      co.$descriptionCoffee
+      FROM
+      $carts c
+      JOIN
+      $coffee co
+       ON
+      c.$idCoffeeCart = co.$idCoffee;
+    ''');
+    final listCarts = cartQuery.map((cart) => CartModel.toMap(cart)).toList();
+    return listCarts;
+  }
+
+  Future<bool> findCartItemById(
+      {required int idCoffee,
+      required String username,
+      required String type}) async {
+    final db = await _databaseService.database;
+    final findCartItem = await db.query(
+      carts,
+      where: '$idCoffeeCart = ? and $usernameUsersCart = ? and $typeCart = ?',
+      whereArgs: [idCoffee, username, type],
+    );
+
+    if (findCartItem.isEmpty) {
+      return true;
+    }
+
+    return false;
+  }
+
+  Future<bool> addCoffeeToCart(CartModel cart) async {
+    final db = await _databaseService.database;
+    final checkCartExist = await findCartItemById(
+      username: cart.username,
+      idCoffee: cart.idCoffee,
+      type: cart.type,
+    );
+
+    if (checkCartExist) {
+      await db.insert(carts, cart.toMap());
+      return true;
+    }
+    return false;
+  }
+
+  Future<bool> deleteCoffeeFromCart(CartModel cart) async {
+    final db = await _databaseService.database;
+    final resultDeleteCoffee = await db.delete(
+      carts,
+      where: '$idCoffeeCart = ? and $usernameUsersCart = ?',
+      whereArgs: [cart.idCoffee, cart.username],
     );
 
     if (resultDeleteCoffee > 0) {

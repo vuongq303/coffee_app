@@ -2,6 +2,7 @@ import 'package:coffee_app/service/database_service.dart';
 import 'package:coffee_app/service/models/coffee_model.dart';
 import 'package:coffee_app/viewmodels/styles/my_color.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailViewModel {
@@ -10,6 +11,8 @@ class DetailViewModel {
   ValueNotifier itemListSizeSelect = ValueNotifier<int>(-1);
   ValueNotifier priceInDetailScreen = ValueNotifier<double>(0);
   ValueNotifier isFavorite = ValueNotifier<bool>(false);
+  ValueNotifier<String> itemSizeSelected = ValueNotifier<String>('');
+  final logger = Logger();
 
   Future<void> checkIsFavorite({required int idCoffee}) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -42,11 +45,13 @@ class DetailViewModel {
   void changeItemListSelect(int index) {
     itemListSizeSelect.value = index;
     priceInDetailScreen.value = coffeeModel.size[index].price;
+    itemSizeSelected.value = coffeeModel.size[index].type;
   }
 
   void setItemDetail(CoffeeModel coffeeItem) {
     itemListSizeSelect.value = -1;
     priceInDetailScreen.value = 0.0;
+    itemSizeSelected.value = '';
     coffeeModel = coffeeItem;
   }
 }

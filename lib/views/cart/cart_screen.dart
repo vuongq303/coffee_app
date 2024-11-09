@@ -1,5 +1,4 @@
-import 'package:coffee_app/viewmodels/styles/my_color.dart';
-import 'package:coffee_app/views/cart/data/home_data.dart';
+import 'package:coffee_app/viewmodels/cart_view_model.dart';
 import 'package:coffee_app/views/cart/widgets/bottom/bottom_nav_cart.dart';
 import 'package:coffee_app/views/cart/widgets/cart_item.dart';
 import 'package:coffee_app/widgets/header_navigation.dart';
@@ -11,7 +10,9 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = context.read<MyColor>();
+    final cartViewModel = context.read<CartViewModel>();
+    final color = cartViewModel.color;
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
@@ -23,11 +24,21 @@ class CartScreen extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              itemCount: cartCoffeeList.length,
-              itemBuilder: (context, index) {
-                final cartItem = cartCoffeeList[index];
-                return CartItem(cartItem: cartItem);
+            child: FutureBuilder(
+              future: cartViewModel.allListCart,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      final cartItem = snapshot.data![index];
+                      return CartItem(cartItem: cartItem);
+                    },
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
               },
             ),
           ),
