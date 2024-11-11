@@ -1,3 +1,4 @@
+import 'package:coffee_app/modules/native_module.dart';
 import 'package:coffee_app/viewmodels/cart_view_model.dart';
 import 'package:coffee_app/viewmodels/detail_view_model.dart';
 import 'package:coffee_app/viewmodels/favorite_view_model.dart';
@@ -30,7 +31,8 @@ class MyApp extends StatelessWidget {
         Provider(create: (context) => HomeViewModel()),
         Provider(create: (context) => LoginViewModel()),
         Provider(create: (context) => RegisterViewModel()),
-        Provider(create: (context) => FavoriteViewModel())
+        Provider(create: (context) => FavoriteViewModel()),
+        Provider(create: (context) => NativeModule()),
       ],
       child: MaterialApp.router(
         title: 'Flutter App',

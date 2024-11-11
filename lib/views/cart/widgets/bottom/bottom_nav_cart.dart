@@ -1,3 +1,4 @@
+import 'package:coffee_app/modules/native_module.dart';
 import 'package:coffee_app/viewmodels/cart_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +9,7 @@ class BottomNavCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartViewModel = context.watch<CartViewModel>();
+    final module = context.read<NativeModule>();
     final color = cartViewModel.color;
 
     return Container(
@@ -55,6 +57,9 @@ class BottomNavCart extends StatelessWidget {
           Expanded(
             flex: 7,
             child: GestureDetector(
+              onTap: () async {
+                await module.pushNotification();
+              },
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 15),
                 decoration: BoxDecoration(

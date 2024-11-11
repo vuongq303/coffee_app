@@ -1,3 +1,4 @@
+import 'package:coffee_app/modules/native_module.dart';
 import 'package:coffee_app/viewmodels/login_view_model.dart';
 import 'package:coffee_app/views/login_register/widgets/button_login.dart';
 import 'package:coffee_app/views/login_register/widgets/header_login.dart';
@@ -6,9 +7,22 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    final module = context.read<NativeModule>();
+    module.createNotification();
+  }
 
   @override
   Widget build(BuildContext context) {
